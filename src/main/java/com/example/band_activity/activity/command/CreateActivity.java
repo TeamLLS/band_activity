@@ -2,9 +2,11 @@ package com.example.band_activity.activity.command;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.Instant;
 
+@Getter
 @AllArgsConstructor
 public class CreateActivity {
 
