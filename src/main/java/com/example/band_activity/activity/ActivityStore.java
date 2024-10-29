@@ -4,7 +4,10 @@ import com.example.band_activity.activity.event.ActivityCreated;
 import com.example.band_activity.activity.event.ActivityEvent;
 import com.example.band_activity.activity.event.ActivityEventJpo;
 import com.example.band_activity.activity.event.ActivityEventRepository;
+import com.example.band_activity.participant.event.ParticipantEvent;
+import com.example.band_activity.participant.event.ParticipantEventJpo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -32,10 +35,19 @@ public class ActivityStore {
         return activityRepository.findById(activityId).orElseThrow();
     }
 
-    public List<Activity> findListByClubId(Long clubId, int pageNo){
-        Pageable pageable = PageRequest.of(pageNo, 2);
+    public Page<Activity> findListByClubId(Long clubId, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
 
-        return activityRepository.findAllByClubId(clubId, pageable).getContent();
+        return activityRepository.findAllByClubId(clubId, pageable);
     }
 
+    public ActivityEventJpo saveEvent(ActivityEvent event){
+        return activityEventRepository.save(new ActivityEventJpo(event));
+    }
+
+    //테스트용
+    public ActivityEventJpo findEvent(String eventId){
+        return activityEventRepository.findById(eventId).orElseThrow();
+    }
+    
 }

@@ -1,15 +1,59 @@
 package com.example.band_activity.external.kafka;
 
+import com.example.band_activity.activity.ActivityService;
+import com.example.band_activity.activity.command.CancelActivity;
+import com.example.band_activity.activity.command.CloseActivity;
+import com.example.band_activity.activity.command.OpenActivity;
+import com.example.band_activity.core.Command;
+import com.example.band_activity.core.UnknownCommandException;
+import com.example.band_activity.participant.ParticipantService;
+import com.example.band_activity.participant.command.AttendActivity;
+import com.example.band_activity.participant.command.NotAttendActivity;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Service;
+import org.springframework.kafka.annotation.RetryableTopic;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 
-@Service
+@Slf4j
+@Component
+@RequiredArgsConstructor
+@KafkaListener(topics = "activity-event-topic", groupId = "activity-consumer-group")
 public class KafkaConsumerService {
 
-    @KafkaListener(topics = "activity-event-topic", groupId = "activity-consumer-group")
-    public void consume(String message) throws IOException {
-        System.out.printf("Consumed Message : %s%n", message);
+    private final ActivityService activityService;
+    private final ParticipantService participantService;
+
+    @KafkaHandler
+    public void consumeOpen(OpenActivity command){
+        activityService.createActivity(command);
+    }
+
+    @KafkaHandler
+    public void consume(CancelActivity command){
+        activityService.cancelActivity(command);
+    }
+
+    @KafkaHandler
+    public void consume(CloseActivity command){
+        activityService.closeActivity(command);
+    }
+
+    @KafkaHandler
+    public void consume(AttendActivity command){
+        participantService.attendActivity(command);
+    }
+
+    @KafkaHandler
+    public void consume(NotAttendActivity command){
+        participantService.notAttendActivity(command);
+    }
+
+    @KafkaHandler(isDefault = true)
+    public void consume(Command command, Acknowledgment acknowledgment){
+        throw new UnknownCommandException("알 수 없는 명령", command.getUsername());
     }
 }

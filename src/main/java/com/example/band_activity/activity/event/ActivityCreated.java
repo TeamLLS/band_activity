@@ -6,11 +6,13 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor
 public class ActivityCreated extends ActivityEvent{
     private String name;
 

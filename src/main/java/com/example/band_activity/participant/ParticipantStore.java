@@ -5,6 +5,7 @@ import com.example.band_activity.participant.event.ParticipantEvent;
 import com.example.band_activity.participant.event.ParticipantEventJpo;
 import com.example.band_activity.participant.event.ParticipantEventRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -26,18 +27,32 @@ public class ParticipantStore {
         return saved;
     }
 
-    public List<Participant> findListByActivityId(Long activityId, int pageNo){
-        Pageable pageable = PageRequest.of(pageNo, 2);
+    public Page<Participant> findListWithActivityByUsername(Long clubId, String username, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
 
-        return participantRepository.findAllByActivityId(activityId, pageable).getContent();
+        return participantRepository.findAllWithActivityByUsername(clubId,username, pageable);
+    }
+
+    public Page<Participant> findListByActivityId(Long activityId, int pageNo, int pageSize){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return participantRepository.findAllByActivityId(activityId, pageable);
     }
 
     public Participant findByActivityIdAndMemberId(Long activityId, Long memberId){
-        return participantRepository.findByActivityIdAndMemberId(activityId, memberId).orElseThrow(); //적절한 오류 생성
+        return participantRepository.findByActivityIdAndMemberId(activityId, memberId).orElseThrow();
     }
 
-    public void saveEvent(ParticipantEvent event){
-        participantEventRepository.save(new ParticipantEventJpo(event));
+    public Participant findByActivityIdAndUsername(Long activityId, String username){
+        return participantRepository.findByActivityIdAndUsername(activityId, username).orElseThrow();
+    }
+
+    public ParticipantEventJpo saveEvent(ParticipantEvent event){
+        return participantEventRepository.save(new ParticipantEventJpo(event));
+    }
+
+    //테스트용
+    public ParticipantEventJpo findEvent(String eventId){
+        return participantEventRepository.findById(eventId).orElseThrow();
     }
 
 }

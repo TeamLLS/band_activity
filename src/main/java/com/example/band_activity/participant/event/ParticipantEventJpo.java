@@ -1,6 +1,5 @@
 package com.example.band_activity.participant.event;
 
-import com.example.band_activity.external.JsonUtil;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;

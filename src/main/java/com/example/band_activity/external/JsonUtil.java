@@ -22,10 +22,10 @@ public class JsonUtil {
         }
     }
 
-    public static Object fromJson(String json, String typeName) {
+    public static <T> T fromJson(String json, Class<T> type) {
         try {
-            return objectMapper.readValue(json, Class.forName(typeName));
-        } catch (JsonProcessingException | ClassNotFoundException e) {
+            return objectMapper.readValue(json, type);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }

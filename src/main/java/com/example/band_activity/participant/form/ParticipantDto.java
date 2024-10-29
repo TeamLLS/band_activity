@@ -1,7 +1,6 @@
 package com.example.band_activity.participant.form;
 
 import com.example.band_activity.participant.Participant;
-import com.example.band_activity.participant.ParticipantStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,6 @@ public class ParticipantDto {
 
     private Long id;
     private Long activityId;
-
 
     private String username;
     private Long memberId;

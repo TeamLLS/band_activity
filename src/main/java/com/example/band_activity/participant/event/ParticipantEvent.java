@@ -1,19 +1,22 @@
 package com.example.band_activity.participant.event;
 
 import com.example.band_activity.external.JsonUtil;
+import jakarta.validation.constraints.Min;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
 
 @Getter
+@NoArgsConstructor
 public abstract class ParticipantEvent {
 
-    private final String eventId;
-    private final Long activityId;
-    private final Long memberId;
-    private final String triggeredBy;
-    private final Instant time;
+    private String eventId;
+    private Long activityId;
+    private Long memberId;
+    private String triggeredBy;
+    private Instant time;
 
     public ParticipantEvent(String eventId, Long activityId, Long memberId, String triggeredBy, Instant time) {
         this.eventId = eventId;

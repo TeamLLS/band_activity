@@ -2,16 +2,18 @@ package com.example.band_activity.activity.event;
 
 import com.example.band_activity.external.JsonUtil;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
 @Getter
+@NoArgsConstructor
 public abstract class ActivityEvent {
-    private final String eventId;
-    private final Long activityId;
-    private final Long clubId;
-    private final String triggeredBy;
-    private final Instant time;
+    private String eventId;
+    private Long activityId;
+    private Long clubId;
+    private String triggeredBy;
+    private Instant time;
 
     public ActivityEvent(String eventId, Long activityId, Long clubId, String triggeredBy, Instant time) {
         this.eventId = eventId;
