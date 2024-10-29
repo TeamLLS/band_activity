@@ -18,62 +18,54 @@ band_activity
 
 # 2. 도메인
 
-## 2-1. Club 
+## 2-1. Activity
 
 | 도메인 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|Club    |      |      |      |      |
-|        |id|Long|Club Id|Primary Key|
+|Activity|      |      |      |      |
+|        |id|Long|Activity Id|Primary Key|
+|        |clubId|Long|Club Id|Club 추적키, NotNull|
 |        |image|String|이미지 url||
 |        |name|String|이름|NotNull|
 |        |description|String|설명||
-|        |contactInfo|String|연락처||
-|        |status|ClubStatus|상태||
+|        |status|ActivityStatus|상태|NotNull|
+|        |startTime|Instant|활동 시작일||
+|        |endTime|Instant|활동 종료일||
+|        |participantNum|Integer|참가자수||
 |        |createdAt|Instant|생성일||
-|        |closedAt|Instant|폐쇄일||
+|        |closedAt|Instant|마감일||
 
 
 | ENUM | 값 | 설명 | 비고 |  
 |------|----|------|------|
-|ClubStatus||      |      |
-|          |ACTIVE|운영중||
-|          |CLOSED|운영종료||
-|          |RECRUITING|회원 모집중||
+|ActivityStatus||  |      |
+|          |OPENED|모집중||
+|          |CLOSED|모집종료||
+|          |CANCELED|취소됨||
 
 
-## 2-2. Member
+## 2-2. Participant
 
 | 도메인 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|Member  |      |      |      |      |
-|        |id|Long|Member Id|Primary Key|
-|        |club|Club|가입 Club|Foreginer Key, NotNull|
+|Participant  |      |      |      |      |
+|        |id|Long|Participant Id|Primary Key|
+|        |activity|Activity|참가 Activity|Foreginer Key, NotNull|
 |        |username|String|username|User 추적키, NotNull|
-|        |role|Role|권한|NotNull|
-|        |ststus|MemberStatus|Member 상태|NotNukk|
-|        |name|String|이름||
-|        |gender|String|성별|"male" or "female"|
-|        |birthYear|Integer|출생년도||
-|        |createdAt|Instant|가입일||
-|        |terminatedAt|Instant|탈퇴일||
+|        |memberId|Long|Member Id|Member 추적키, NotNull|
+|        |memberName|String|Member 이름||
+|        |status|ParticipantStauts|상태||
 
 
 
 | ENUM | 값 | 설명 | 비고 |  
 |------|----|------|------|
-|MemberStatus|     |     ||
-|            |ACTIVE|활동중||
-|            |INACTIVE|휴면||
-|            |TERMIATED|탈퇴됨||
+|ParticipantStatus||     ||
+|            |ATTEND|참가||
+|            |NOT_ATTEND|불참||
+|            |TADDITIONAL_ATTEND|추가 참가||
+|            |TADDITIONAL_NOT_ATTEND|추가 불참||
 
-
-
-| ENUM | 값 | 설명 | 비고 |  
-|------|----|------|------|
-|Role  |    |      |      |
-|      |OWNER|회장|3|
-|      |MANAGER|관리자|2|
-|      |REGULAR|일반|1|
 
 
 # 3. 이벤트
