@@ -48,7 +48,7 @@ band_activity
 
 | 도메인 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|Participant  |      |      |      |      |
+|Participant|   |      |      |      |
 |        |id|Long|Participant Id|Primary Key|
 |        |activity|Activity|참가 Activity|Foreginer Key, NotNull|
 |        |username|String|username|User 추적키, NotNull|
@@ -75,105 +75,85 @@ band_activity
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|ClubEvent|      |      |      |      |
-|         |eventId|String|event Id|Event 추적키|
+|ActivityEvent|     |      |      |      |
+|         |eventId|String|Event Id|Event 추적키|
 |         |triggerdBy|String|생성자||
+|         |activityId|Long|Activity Id|Activity 추적키|
 |         |clubId|Long|Club Id|Club 추적키|
 |         |time|Instnat|발생 시간||
 
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|ClubCreated|      |      |발생 API: Club 생성|ClubEvent 상속|
-|           |name|String|Club 이름||
-|           |image|String|Club 이미지 url||
-|           |description|String|Club 설명||
-|           |contactInfo|String|Club 연락처||
+|ActivityCreated|      |      |발생 API: Activity 생성|ActivityEvent 상속|
+|           |name|String|Activity 이름||
+|           |image|String|Activity 이미지 url||
+|           |description|String|Activity 설명||
+|           |startTime|Instant|활동 시작일||
+|           |endTime|Instant|활동 종료일||
 
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|ClubClosed|      |      |발생 API: Club 폐쇄|ClubEvent 상속|
-|          |status|ClubStatus|Club 상태|=TERMINATED|
-
-
-| 이벤트 | 속성 | 타입 | 설명 | 비고 |  
-|--------|------|------|------|------|
-|ClubChanged|      |      |발생 API: Club 정보 변경|ClubEvent 상속|
-|           |name|String|Club 이름||
-|           |image|String|Club 이미지 url||
-|           |description|String|Club 설명||
-|           |contactInfo|String|Club 연락처||
-|           |status|ClubStatus|Club 상태||
-
-
-## 3-2. Member 이벤트
+|ActivityClosed|      |      |발생 API: Activity 종료|ActivityEvent 상속|
+|          |status|ActivityStatus|Actitivity 상태|=CLOSED|
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|MemberEvent|      |      |      |      |
+|ActivityCanceled|      |      |발생 API: Activity 취소|ActivityEvent 상속|
+|          |status|ActivityStatus|Actitivity 상태|=CANCELED|
+
+
+## 3-2. Participant 이벤트
+
+| 이벤트 | 속성 | 타입 | 설명 | 비고 |  
+|--------|------|------|------|------|
+|ParticipantEvent|      |      |      |      |
 |           |eventId|String|event Id|Event 추적키|
 |           |triggerdBy|String|생성자||
-|           |clubId|Long|Club Id|Club 추적키|
+|           |activityId|Long|Activity Id|Activity 추적키|
 |           |memberId|Long|Member Id|Member 추적키|
 |           |time|Instnat|발생 시간||
 
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|MemberCreated|      |      |발생 API: Club 생성, Member 등록|MemberEvent 상속|
-|             |username|String|username|User 추적키|
-|             |role|Role|Member 권한||
-|             |name|String|Member 이름||
-|             |gender|String|Member 성별|"male" or "female"|
-|             |birthYear|Integer|Member 출생년도||
-
-| 이벤트 | 속성 | 타입 | 설명 | 비고 |  
-|--------|------|------|------|------|
-|MemberRoleChanged|      |      |발생 API: Member 권한 변경|MemberEvent 상속|
-|                 |role|Role|Member 권한||
+|ParticipantCreated|      |      |발생 API: Activity 참가 관련|ParticipantEvent 상속|
+|             |memberName|String|Member 이름||
 
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|MemberWithDrawn|      |      |발생 API: Member 탈퇴|MemberEvent 상속|
-|               |status|MemberStatus|Member상태|=TERMINATED|
+|ParticiapntStatusChanged|      |      |발생 API: Acitivity 참가 관련|ParticipantEvent 상속|
+|                 |status|ParticipantStatus|변경 상태||
+
 
 | 이벤트 | 속성 | 타입 | 설명 | 비고 |  
 |--------|------|------|------|------|
-|MemberBanned|      |      |발생 API: Member 강퇴|MemberEvent 상속|
-|            |status|MemberStatus|Member상태|=TERMINATED|
+|participantConfirmed|      |      |발생 API: Activity 종료|ParticipantEvent 상속|
+|               |status|ParticipantStatus|확정 상태||
 
 
 # 4. 예외
 
-
 | Exception | 속성 | 타입 | 설명 | 비고 |  
 |-----------|------|------|------|------|
-|NotMemberException|      |      |해당 Member가 활동 중이 아님을 표시|RuntimeException, 반환코드=404|
-|                  |clubId|Long|Club Id||
-|                  |usernmae|String|username|
-
-| Exception | 속성 | 타입 | 설명 | 비고 |  
-|-----------|------|------|------|------|
-|NotActiveMemberException|      |      |해당 User가 Club의 Member가 아님을 표시|RuntimeException, 반환코드=403|
-|                  |memberId|Long|Member Id||
-|                  |status|String|Member 상태|
+|ActivityNotOpenedException|      |      |Acitivity가 OPENED가 아님을 표시|RuntimeException|
+|                  |activityId|Long|Activity Id||
+|                  |current|String|현재 상태|
 
 
 | Exception | 속성 | 타입 | 설명 | 비고 |  
 |-----------|------|------|------|------|
-|InsufficientMemberException|      |      |해당 Member가 접근권한이 없음을 표시|RuntimeException, 반환코드=403|
-|                           |memberId|Long|Member Id||
-|                           |role|String|Member 권한|
-
-
+|ActivityNotClosedException|      |      |Acitivity가 CLOSED가 아님을 표시|RuntimeException|
+|                  |activityId|Long|Activity Id||
+|                  |current|String|현재 상태|
 
 | Exception | 속성 | 타입 | 설명 | 비고 |  
 |-----------|------|------|------|------|
-|DuplicatedMemberException|      |      |해당 User가 이미 Club의 Member임을 표시|RuntimeException, 반환코드=409|
-|                  |clubId|Long|Club Id||
-|                  |usernmae|String|username|
+|ActivityNotInCLubException|      |      |해당 Club의 Activity가 아님을 표시|RuntimeException|
+|                  |activityId|Long|Activity Id||
+|                  |clubId|String|Club Id|
 
 
 
@@ -181,16 +161,14 @@ band_activity
 
 | 컴포넌트 | 설명 | 비고 |  
 |----------|------|------|
-|UserServiceClient|User server 접근 목적 utils|FeignClient 기반 rest api 통신|
-|S3Service|S3 접근 목적 utils||
-|ClubController|Club 관련 엔드포인트||
-|ClubService|Club 관련 비즈니스 로직 수행||
-|ClubStore|Club 관련 DB 접근||
-|MemberController|Member 관련 엔드포인트||
-|MemberService|Member 관련 비즈니스 로직 수행||
-|MemberStore|Member 관련 DB 접근||
-
-
+|KafkaConsumerService|kafka 메시지 소비용 컴포넌트||
+|ActivityController|Activity 관련 엔드포인트||
+|ActivityService|Activity 관련 비즈니스 로직 수행||
+|ActivityStore|Activity 관련 DB 접근||
+|ParticipantController|Participant 관련 엔드포인트||
+|ParticipantService|Participant 관련 비즈니스 로직 수행||
+|ParticipantStore|Participant 관련 DB 접근||
 
 
 # 6. ERD
+![c1](https://github.com/user-attachments/assets/201c0793-7359-4f02-a1f9-422bc3e04dbf)
