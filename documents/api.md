@@ -9,10 +9,10 @@
 |[활동 종료](#활동-종료)|대상 활동의 모집 종료|Activity 변경|ActivityClosed, ParticipantConfrimed|
 |[활동 참가](#활동-참가)|대상 활동에 Member 참가|Participant 생성, 변경|ParticipantCreated, ParticipantStatusChanged|
 |[활동 불참](#활동-불참)|대상 활동의 참가 취소|Participant 변경|ParticipantStatusChanged|
-|[활동 추가참가](#회원-추가참가)|활동 모집 종료 이후 참가 Member 추가|Participant 생성, 변경|ParticipantCreated, ParitipantStatusChanged, ParticipantConfirmed|
+|[활동 추가참가](#활동-추가참가)|활동 모집 종료 이후 참가 Member 추가|Participant 생성, 변경|ParticipantCreated, ParitipantStatusChanged, ParticipantConfirmed|
 |[활동 추가불참](#활동-추가불참)|활동 모집 종료 이후 참가 Member 취소|Participant 변경|ParitipantStatusChanged, ParticipantConfirmed|]
 |[참가자 조회](#참가자-조회)|대상 활동의 참가자 조회|||
-|[참가 활동 조회](#참가-할동-조회)|내가 참가한 활동 조회|||
+|[참가 활동 조회](#참가-활동-조회)|내가 참가한 활동 조회|||
 
 
 
