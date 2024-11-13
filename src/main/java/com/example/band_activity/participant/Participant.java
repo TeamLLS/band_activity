@@ -56,7 +56,7 @@ public class Participant {
         return new ParticipantStatusChanged(command.getUsername(), this);
     }
 
-    public ParticipantConfirmed confirmed(ConfirmParticipant command){
+    public ParticipantConfirmed confirm(ConfirmParticipant command){
         return new ParticipantConfirmed(command.getUsername(), this);
     }
 

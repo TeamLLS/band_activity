@@ -19,6 +19,7 @@ import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.retry.backoff.FixedBackOffPolicy;
+import org.springframework.util.backoff.FixedBackOff;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +58,9 @@ public class KafkaConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<String,String> factory
                 = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(this.consumerFactory());
+        factory.setCommonErrorHandler(new DefaultErrorHandler(
+                new FixedBackOff(2000L, 3)  // 3초 간격, 3회 재시도
+        ));
 
         return factory;
     }

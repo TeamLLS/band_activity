@@ -14,16 +14,13 @@ public class OpenActivity extends Command{
 
     @NotNull
     private Long clubId;
-
     @NotNull
     private String name;
 
     private String image;
-
+    private String location;
     private String description;
-
     private Instant startTime;
-
     private Instant endTime;
 
     public OpenActivity(String username, Long clubId, String name, String image, String description, Instant startTime, Instant endTime) {

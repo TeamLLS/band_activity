@@ -28,14 +28,11 @@ public class ParticipantStore {
     }
 
     public Page<Participant> findListWithActivityByUsername(Long clubId, String username, int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-
-        return participantRepository.findAllWithActivityByUsername(clubId,username, pageable);
+        return participantRepository.findAllWithActivityByUsername(clubId,username, PageRequest.of(pageNo, pageSize));
     }
 
     public Page<Participant> findListByActivityId(Long activityId, int pageNo, int pageSize){
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        return participantRepository.findAllByActivityId(activityId, pageable);
+        return participantRepository.findAllByActivityId(activityId, PageRequest.of(pageNo, pageSize));
     }
 
     public Participant findByActivityIdAndMemberId(Long activityId, Long memberId){

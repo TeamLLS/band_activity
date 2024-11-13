@@ -84,8 +84,8 @@ public class ActivityServiceTest {
 
     @Test
     public void getListTest(){
-        List<ActivityItemDto> listA = activityService.getActivityList(1L, 0);
-        List<ActivityItemDto> listB = activityService.getActivityList(1L, 1);
+        List<ActivityItemDto> listA = activityService.getActivityList(1L, 0, 2);
+        List<ActivityItemDto> listB = activityService.getActivityList(1L, 1, 2);
 
         ActivityItemDto dto = new ActivityItemDto(activities.get(2), listB.get(0).getImage());
 

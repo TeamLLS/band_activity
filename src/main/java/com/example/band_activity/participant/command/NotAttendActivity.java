@@ -12,12 +12,9 @@ public class NotAttendActivity extends Command {
 
     @NotNull
     private Long activityId;
-
     @NotNull
     private Long memberId;
-
     private Boolean additional;
-
     public boolean isAdditional() {
         return additional != null ? additional : false;
     }

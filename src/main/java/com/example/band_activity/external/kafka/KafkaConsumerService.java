@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@KafkaListener(topics = "activity-event-topic", groupId = "activity-consumer-group")
+@KafkaListener(topics = "activity-topic", groupId = "activity-consumer-group")
 public class KafkaConsumerService {
 
     private final ActivityService activityService;
@@ -33,22 +33,22 @@ public class KafkaConsumerService {
     }
 
     @KafkaHandler
-    public void consume(CancelActivity command){
+    public void consumeCancel(CancelActivity command){
         activityService.cancelActivity(command);
     }
 
     @KafkaHandler
-    public void consume(CloseActivity command){
+    public void consumeClose(CloseActivity command){
         activityService.closeActivity(command);
     }
 
     @KafkaHandler
-    public void consume(AttendActivity command){
+    public void consumeAttend(AttendActivity command){
         participantService.attendActivity(command);
     }
 
     @KafkaHandler
-    public void consume(NotAttendActivity command){
+    public void consumeNotAttend(NotAttendActivity command){
         participantService.notAttendActivity(command);
     }
 

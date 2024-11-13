@@ -5,8 +5,8 @@ import com.example.band_activity.activity.ActivityStore;
 import com.example.band_activity.participant.command.*;
 import com.example.band_activity.participant.form.ParticipantActivityItemDto;
 import com.example.band_activity.participant.form.ParticipantDto;
-import com.example.band_activity.policy.ActivityClubAccessPolicy;
-import com.example.band_activity.policy.ActivityStatusAccessPolicy;
+import com.example.band_activity.activity.policy.ActivityClubAccessPolicy;
+import com.example.band_activity.activity.policy.ActivityStatusAccessPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -46,7 +46,7 @@ public class ParticipantService {
                 && (participant.getStatus()==ParticipantStatus.NOT_ATTEND || participant.getStatus()==ParticipantStatus.ADDITIONAL_NOT_ATTEND)){
             ActivityStatusAccessPolicy.isClosed(participant.getActivity());
             participantStore.saveEvent(participant.attend(command));
-            participantStore.saveEvent(participant.confirmed(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
 
         }else if(participant.getStatus()==ParticipantStatus.NOT_ATTEND){
             ActivityStatusAccessPolicy.isOpened(participant.getActivity());
@@ -64,7 +64,7 @@ public class ParticipantService {
                 && (participant.getStatus()==ParticipantStatus.ATTEND || participant.getStatus()==ParticipantStatus.ADDITIONAL_ATTEND)){
             ActivityStatusAccessPolicy.isClosed(participant.getActivity());
             participantStore.saveEvent(participant.notAttend(command));
-            participantStore.saveEvent(participant.confirmed(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
 
         }else if(participant.getStatus()==ParticipantStatus.ATTEND){
             ActivityStatusAccessPolicy.isOpened(participant.getActivity());
@@ -90,15 +90,15 @@ public class ParticipantService {
         Participant participant = participantStore.save(command.getUsername(), new Participant(command));
 
         if(command.isAdditional()){
-            participantStore.saveEvent(participant.confirmed(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
         }
 
         return participant;
     }
 
     @Transactional(readOnly = true)
-    public List<ParticipantActivityItemDto> getParticipantActivityList(Long clubId, String username, int pageNo){
-        return participantStore.findListWithActivityByUsername(clubId, username, pageNo, 2).getContent()
+    public List<ParticipantActivityItemDto> getParticipantActivityList(Long clubId, String username, int pageNo, int pageSize){
+        return participantStore.findListWithActivityByUsername(clubId, username, pageNo, pageSize).getContent()
                 .stream().map(p -> new ParticipantActivityItemDto(p, production + "/" + p.getActivity().getImage())).toList();
     }
 
@@ -128,7 +128,7 @@ public class ParticipantService {
 
         do{
             page = participantStore.findListByActivityId(command.getActivityId(), pageNo, 2);
-            page.getContent().forEach(p -> participantStore.saveEvent(p.confirmed(command)));
+            page.getContent().forEach(p -> participantStore.saveEvent(p.confirm(command)));
 
             pageNo++;
         }while (page.hasNext());

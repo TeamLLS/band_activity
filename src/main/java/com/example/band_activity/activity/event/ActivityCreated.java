@@ -15,13 +15,11 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ActivityCreated extends ActivityEvent{
     private String name;
-
     private String image;
 
+    private String location;
     private String description;
-
     private Instant startTime;
-
     private Instant endTime;
 
 
@@ -29,6 +27,7 @@ public class ActivityCreated extends ActivityEvent{
         super(UUID.randomUUID().toString(), activity.getId(), activity.getClubId(), username, activity.getCreatedAt());
         this.name = activity.getName();
         this.image = activity.getImage();
+        this.location = activity.getLocation();
         this.description = activity.getDescription();
         this.startTime = activity.getStartTime();
         this.endTime = activity.getEndTime();

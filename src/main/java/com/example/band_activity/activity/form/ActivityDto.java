@@ -19,6 +19,7 @@ public class ActivityDto {
 
     private String image;
 
+    private String location;
     private String description;
 
     private Instant startTime;
@@ -35,6 +36,7 @@ public class ActivityDto {
         this.clubId = activity.getClubId();
         this.name = activity.getName();
         this.image = imageResource;
+        this.location = activity.getLocation();
         this.description = activity.getDescription();
         this.startTime = activity.getStartTime();
         this.endTime = activity.getEndTime();

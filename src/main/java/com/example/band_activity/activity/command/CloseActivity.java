@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class CloseActivity extends Command {
     @NotNull
     private Long activityId;
-
     @NotNull
     private Long clubId;
 

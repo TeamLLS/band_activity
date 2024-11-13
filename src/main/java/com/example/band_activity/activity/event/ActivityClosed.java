@@ -10,7 +10,6 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 public class ActivityClosed extends ActivityEvent{
-
     private ActivityStatus status;
 
     public ActivityClosed(String username, Activity activity) {

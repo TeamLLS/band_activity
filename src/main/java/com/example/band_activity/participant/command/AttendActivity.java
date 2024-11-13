@@ -14,21 +14,17 @@ public class AttendActivity extends Command {
     @NotNull
     private Long activityId;
     private Activity activity; //반드시 별도세팅
-
     @NotNull
     private Long clubId;    //유효 참가 확인용
-
     @NotNull
     private Long memberId;
     private String memberName;
-
-
     private Boolean additional;
     private String profileName;
+
     public boolean isAdditional(){
         return additional!=null?additional:false;
     }
-
     public void setActivity(Activity activity) {
         this.activity = activity;
     }

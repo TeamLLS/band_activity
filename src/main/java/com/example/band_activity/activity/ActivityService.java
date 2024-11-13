@@ -7,8 +7,8 @@ import com.example.band_activity.activity.form.ActivityDto;
 import com.example.band_activity.activity.form.ActivityItemDto;
 import com.example.band_activity.participant.ParticipantService;
 import com.example.band_activity.participant.command.ConfirmParticipant;
-import com.example.band_activity.policy.ActivityClubAccessPolicy;
-import com.example.band_activity.policy.ActivityStatusAccessPolicy;
+import com.example.band_activity.activity.policy.ActivityClubAccessPolicy;
+import com.example.band_activity.activity.policy.ActivityStatusAccessPolicy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -39,8 +39,8 @@ public class ActivityService {
     }
 
     @Transactional(readOnly = true)
-    public List<ActivityItemDto> getActivityList(Long clubId, int pageNo){
-        return activityStore.findListByClubId(clubId, pageNo, 2).getContent().stream()
+    public List<ActivityItemDto> getActivityList(Long clubId, int pageNo, int pageSize){
+        return activityStore.findListByClubId(clubId, pageNo, pageSize).getContent().stream()
                 .map(a -> new ActivityItemDto(a, production + "/" + a.getImage())).toList();
     }
 

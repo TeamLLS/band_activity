@@ -130,7 +130,7 @@ public class ParticipantServiceTest {
 
     @Test
     public void getActivityListTest(){
-        List<ParticipantActivityItemDto> list = participantService.getParticipantActivityList(1L, "UserC", 0);
+        List<ParticipantActivityItemDto> list = participantService.getParticipantActivityList(1L, "UserC", 0, 2);
 
         ParticipantActivityItemDto dto = new ParticipantActivityItemDto(participants.get(2), list.get(0).getImage());
 

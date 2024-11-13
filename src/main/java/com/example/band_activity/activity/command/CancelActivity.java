@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class CancelActivity extends Command {
     @NotNull
     private Long activityId;
-
     @NotNull
     private Long clubId;
 
