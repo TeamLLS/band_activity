@@ -50,7 +50,7 @@ public class ParticipantServiceTest {
     @BeforeEach
     public void saveParticipant(){
 
-        Activity activity = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", null, null, null));
+        Activity activity = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null));
 
         activities = new ArrayList<>();
         activities.add(activity);
@@ -95,7 +95,7 @@ public class ParticipantServiceTest {
         commands = new ArrayList<>();
         commands.add(new NotAttendActivity("UserA", 1L, 1L, null));
         commands.add(new AttendActivity("TestManager", 1L, 1L, 1L, "TesterA", true, "UserA"));
-        commands.add(new AttendActivity("TestManager", 1L, 2L, 4L, "TesterD", true, "UserD"));
+        commands.add(new AttendActivity("TestManager", 1L, 1L, 4L, "TesterD", true, "UserD"));
         commands.add(new ConfirmParticipant("TestManager", 1L));
     }
 

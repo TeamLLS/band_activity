@@ -16,6 +16,7 @@ public class ParticipantEventJpo {
     @Id
     private String eventId;
     private Long activityId;
+    private Long clubId;
     private Long memberId;
     private String triggeredBy;
     private String eventType;
@@ -26,6 +27,7 @@ public class ParticipantEventJpo {
     public ParticipantEventJpo(ParticipantEvent participantEvent) {
         this.eventId = participantEvent.getEventId();
         this.activityId = participantEvent.getActivityId();
+        this.clubId = participantEvent.getClubId();
         this.memberId = participantEvent.getMemberId();
         this.triggeredBy = participantEvent.getTriggeredBy();
         this.eventType = participantEvent.typeName();

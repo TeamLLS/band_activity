@@ -1,28 +1,24 @@
 package com.example.band_activity.participant;
 
-import com.example.band_activity.participant.event.ParticipantCreated;
-import com.example.band_activity.participant.event.ParticipantEvent;
-import com.example.band_activity.participant.event.ParticipantEventJpo;
-import com.example.band_activity.participant.event.ParticipantEventRepository;
+import com.example.band_activity.external.kafka.KafkaProducerService;
+import com.example.band_activity.participant.event.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
 @AllArgsConstructor
 public class ParticipantStore {
 
+    private final KafkaProducerService kafkaProducerService;
     private final ParticipantRepository participantRepository;
     private final ParticipantEventRepository participantEventRepository;
 
     public Participant save(String username, Participant participant){
         Participant saved = participantRepository.save(participant);
-        ParticipantEvent participantCreated = new ParticipantCreated(username, saved);
-        participantEventRepository.save(new ParticipantEventJpo(participantCreated));
+        saveEvent(new ParticipantCreated(username, saved));
 
         return saved;
     }
@@ -44,7 +40,13 @@ public class ParticipantStore {
     }
 
     public ParticipantEventJpo saveEvent(ParticipantEvent event){
-        return participantEventRepository.save(new ParticipantEventJpo(event));
+        ParticipantEventJpo saved = participantEventRepository.save(new ParticipantEventJpo(event));
+
+        if(event instanceof ParticipantConfirmed){
+            kafkaProducerService.sendParticipantEventToKafka(event);
+        }
+
+        return saved;
     }
 
     //테스트용

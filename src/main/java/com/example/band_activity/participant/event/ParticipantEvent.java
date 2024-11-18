@@ -13,13 +13,15 @@ import java.time.Instant;
 public abstract class ParticipantEvent {
 
     private String eventId;
+    private Long clubId;
     private Long activityId;
     private Long memberId;
     private String triggeredBy;
     private Instant time;
 
-    public ParticipantEvent(String eventId, Long activityId, Long memberId, String triggeredBy, Instant time) {
+    public ParticipantEvent(String eventId, Long clubId, Long activityId, Long memberId, String triggeredBy, Instant time) {
         this.eventId = eventId;
+        this.clubId = clubId;
         this.activityId = activityId;
         this.memberId = memberId;
         this.triggeredBy = triggeredBy;

@@ -24,11 +24,11 @@ public class DummyUtil {
     @PostConstruct
     public void makeDummy(){
 
-        OpenActivity commandA1 = new OpenActivity("Dummy_userB", 1L, "활동1", "common/activity/default.png", "for test1",
+        OpenActivity commandA1 = new OpenActivity("Dummy_userB", 1L, "활동1", "common/activity/default.png", "장소1", "for test1",
                 Instant.parse("2024-12-14T09:30:00+09:00"), Instant.parse("2024-12-15T12:30:00+09:00"));
-        OpenActivity commandA2 = new OpenActivity("Dummy_userB", 1L, "활동2", "common/activity/default.png", "for test2",
+        OpenActivity commandA2 = new OpenActivity("Dummy_userB", 1L, "활동2", "common/activity/default.png", "장소2", "for test2",
                 Instant.parse("2024-12-17T10:30:00+09:00"), Instant.parse("2024-12-18T16:30:00+09:00"));
-        OpenActivity commandA3 = new OpenActivity("Dummy_userA", 1L, "활동3", "common/activity/default.png", "for test3",
+        OpenActivity commandA3 = new OpenActivity("Dummy_userA", 1L, "활동3", "common/activity/default.png", "장소3", "for test3",
                 Instant.parse("2024-12-21T12:30:00+09:00"), Instant.parse("2024-12-23T17:30:00+09:00"));
 
         Activity activity1 = activityRepository.save(new Activity(commandA1));

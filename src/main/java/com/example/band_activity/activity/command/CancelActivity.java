@@ -10,12 +10,8 @@ import lombok.NoArgsConstructor;
 public class CancelActivity extends Command {
     @NotNull
     private Long activityId;
-    @NotNull
-    private Long clubId;
-
     public CancelActivity(String username, Long activityId, Long clubId) {
-        super(username);
+        super(username, clubId);
         this.activityId = activityId;
-        this.clubId = clubId;
     }
 }

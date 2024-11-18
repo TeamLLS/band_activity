@@ -15,8 +15,6 @@ public class AttendActivity extends Command {
     private Long activityId;
     private Activity activity; //반드시 별도세팅
     @NotNull
-    private Long clubId;    //유효 참가 확인용
-    @NotNull
     private Long memberId;
     private String memberName;
     private Boolean additional;
@@ -33,9 +31,8 @@ public class AttendActivity extends Command {
     }
 
     public AttendActivity(String username, Long activityId, Long clubId, Long memberId, String memberName, Boolean additional, String profileName) {
-        super(username);
+        super(username, clubId);
         this.activityId = activityId;
-        this.clubId = clubId;
         this.memberId = memberId;
         this.memberName = memberName;
         this.additional = additional;

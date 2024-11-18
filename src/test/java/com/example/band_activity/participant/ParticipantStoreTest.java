@@ -35,7 +35,7 @@ public class ParticipantStoreTest {
     @BeforeEach
     public void saveParticipant(){
 
-        Activity activity = activityStore.save("UserA", new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", null, null, null)));
+        Activity activity = activityStore.save("UserA", new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null)));
 
         activities = new ArrayList<>();
         activities.add(activity);

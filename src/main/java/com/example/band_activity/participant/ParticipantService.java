@@ -46,7 +46,7 @@ public class ParticipantService {
                 && (participant.getStatus()==ParticipantStatus.NOT_ATTEND || participant.getStatus()==ParticipantStatus.ADDITIONAL_NOT_ATTEND)){
             ActivityStatusAccessPolicy.isClosed(participant.getActivity());
             participantStore.saveEvent(participant.attend(command));
-            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), participant.getActivity().getId())));
 
         }else if(participant.getStatus()==ParticipantStatus.NOT_ATTEND){
             ActivityStatusAccessPolicy.isOpened(participant.getActivity());
@@ -64,7 +64,7 @@ public class ParticipantService {
                 && (participant.getStatus()==ParticipantStatus.ATTEND || participant.getStatus()==ParticipantStatus.ADDITIONAL_ATTEND)){
             ActivityStatusAccessPolicy.isClosed(participant.getActivity());
             participantStore.saveEvent(participant.notAttend(command));
-            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), participant.getActivity().getId())));
 
         }else if(participant.getStatus()==ParticipantStatus.ATTEND){
             ActivityStatusAccessPolicy.isOpened(participant.getActivity());
@@ -90,7 +90,7 @@ public class ParticipantService {
         Participant participant = participantStore.save(command.getUsername(), new Participant(command));
 
         if(command.isAdditional()){
-            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), command.getActivityId())));
+            participantStore.saveEvent(participant.confirm(new ConfirmParticipant(command.getUsername(), participant.getActivity().getId())));
         }
 
         return participant;

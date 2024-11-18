@@ -4,6 +4,8 @@ import com.example.band_activity.activity.event.ActivityCreated;
 import com.example.band_activity.activity.event.ActivityEvent;
 import com.example.band_activity.activity.event.ActivityEventJpo;
 import com.example.band_activity.activity.event.ActivityEventRepository;
+import com.example.band_activity.external.kafka.KafkaProducerConfig;
+import com.example.band_activity.external.kafka.KafkaProducerService;
 import com.example.band_activity.participant.event.ParticipantEvent;
 import com.example.band_activity.participant.event.ParticipantEventJpo;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ActivityStore {
 
+    private final KafkaProducerService kafkaProducerService;
+
     private final ActivityRepository activityRepository;
 
     private final ActivityEventRepository activityEventRepository;
@@ -25,8 +29,7 @@ public class ActivityStore {
 
     public Activity save(String username, Activity activity){
         Activity saved = activityRepository.save(activity);
-        ActivityEvent activityCreated = new ActivityCreated(username, saved);
-        activityEventRepository.save(new ActivityEventJpo(activityCreated));
+        saveEvent(new ActivityCreated(username, saved));
 
         return saved;
     }
@@ -42,7 +45,13 @@ public class ActivityStore {
     }
 
     public ActivityEventJpo saveEvent(ActivityEvent event){
-        return activityEventRepository.save(new ActivityEventJpo(event));
+        ActivityEventJpo saved = activityEventRepository.save(new ActivityEventJpo(event));
+
+        if(!(event instanceof ActivityCreated)){
+            kafkaProducerService.sendActivityEventToKafka(event);
+        }
+
+        return saved;
     }
 
     //테스트용

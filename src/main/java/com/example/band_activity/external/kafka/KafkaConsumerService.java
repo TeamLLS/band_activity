@@ -28,27 +28,27 @@ public class KafkaConsumerService {
     private final ParticipantService participantService;
 
     @KafkaHandler
-    public void consumeOpen(OpenActivity command){
+    public void consumeCommand(OpenActivity command){
         activityService.createActivity(command);
     }
 
     @KafkaHandler
-    public void consumeCancel(CancelActivity command){
+    public void consumeCommand(CancelActivity command){
         activityService.cancelActivity(command);
     }
 
     @KafkaHandler
-    public void consumeClose(CloseActivity command){
+    public void consumeCommand(CloseActivity command){
         activityService.closeActivity(command);
     }
 
     @KafkaHandler
-    public void consumeAttend(AttendActivity command){
+    public void consumeCommand(AttendActivity command){
         participantService.attendActivity(command);
     }
 
     @KafkaHandler
-    public void consumeNotAttend(NotAttendActivity command){
+    public void consumeCommand(NotAttendActivity command){
         participantService.notAttendActivity(command);
     }
 

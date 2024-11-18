@@ -14,7 +14,7 @@ public class ConfirmParticipant extends Command {
     private Long activityId;
 
     public ConfirmParticipant(String username, Long activityId) {
-        super(username);
+        super(username, null);
         this.activityId = activityId;
     }
 }

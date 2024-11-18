@@ -20,7 +20,7 @@ public class NotAttendActivity extends Command {
     }
 
     public NotAttendActivity(String username, Long activityId, Long memberId, Boolean additional) {
-        super(username);
+        super(username, null);
         this.activityId = activityId;
         this.memberId = memberId;
         this.additional = additional;
