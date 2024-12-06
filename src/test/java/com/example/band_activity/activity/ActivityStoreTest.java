@@ -1,8 +1,5 @@
 package com.example.band_activity.activity;
 
-
-import com.example.band_activity.activity.command.CancelActivity;
-import com.example.band_activity.activity.command.CloseActivity;
 import com.example.band_activity.activity.command.OpenActivity;
 import com.example.band_activity.activity.event.ActivityCanceled;
 import com.example.band_activity.activity.event.ActivityClosed;
@@ -11,7 +8,6 @@ import com.example.band_activity.external.kafka.KafkaProducerService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -37,9 +33,9 @@ public class ActivityStoreTest {
     public void saveActivities(){
 
         //엔티티 인스턴스 생성
-        Activity saved1 = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlaceA", null, null, null));
-        Activity saved2 = new Activity(new OpenActivity("UserA", 1L, "TestActivityB", "TestImageB", "TestPlaceB", null, null, null));
-        Activity saved3 = new Activity(new OpenActivity("UserB", 1L, "TestActivityC", "TestImageC", "TestPlaceC", null, null, null));
+        Activity saved1 = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlaceA", null, null, null, null));
+        Activity saved2 = new Activity(new OpenActivity("UserA", 1L, "TestActivityB", "TestImageB", "TestPlaceB", null, null, null, null));
+        Activity saved3 = new Activity(new OpenActivity("UserB", 1L, "TestActivityC", "TestImageC", "TestPlaceC", null, null, null, null));
 
 
         //영속성 컨텍스트 업로드
