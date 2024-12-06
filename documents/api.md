@@ -28,8 +28,10 @@ form-data: {
   name, 활동 이름, (String)
   description: 활동 설명, (String)
   image: 활동 이미지, (MulitPartFile)
+  location: 활동 장소, (String)
   startTime: 활동 시작 시간, (Instant, ISO 8601)
-  endTime: 활동 종료 시간 (Instnat, ISO 8601)
+  endTime: 활동 종료 시간, (Instnat, ISO 8601)
+  deadline: 모집 종료 시간  (Instnat, ISO 8601)
 } 
 ```
 
@@ -78,9 +80,11 @@ body: {
   clubId: Club Id, (Long)
   name: 활동 이름,  (String)
   image: 이미지 url,  (String)
+  location: 활동 장소, (String)
   description: 설명, (String)
   startTime: 시작 시간, (Instnat, ISO 8601)
   endTime: 종료 시간, (Instnat, ISO 8601)
+  deadline: 모집 종료 시간  (Instnat, ISO 8601)
   status: 상태,  (String)
   participantNum: 참가자 수 (Integer)
 }
@@ -185,6 +189,7 @@ body: {
       memberId: Member Id, (Long)
       memberName: Member 이름, (String)
       status: 참가 상태 (String)
+      changedAt: 신청 시간 (Instnat, ISO 8601)
     },
     ...
   ],
