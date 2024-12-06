@@ -27,7 +27,7 @@ public class ActivityController {
 
     @GetMapping("/{clubId}/list")
     public ResponseEntity<?> getActivityList(@PathVariable Long clubId, @RequestParam int pageNo){
-        List<ActivityItemDto> activityList = activityService.getActivityList(clubId, pageNo, 2);
+        List<ActivityItemDto> activityList = activityService.getActivityList(clubId, pageNo, 50);
 
         Map<String, Object> response = new HashMap<>();
         response.put("list", activityList);

@@ -4,6 +4,8 @@ import com.example.band_activity.participant.Participant;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 public class ParticipantDto {
@@ -16,6 +18,7 @@ public class ParticipantDto {
     private String memberName;
 
     private String status;
+    private Instant changedAt;
 
     public ParticipantDto(Participant participant) {
         this.id = participant.getId();
@@ -24,5 +27,6 @@ public class ParticipantDto {
         this.memberId = participant.getMemberId();
         this.memberName = participant.getMemberName();
         this.status = participant.getStatus().getDisplay();
+        this.changedAt = participant.getChangedAt();
     }
 }

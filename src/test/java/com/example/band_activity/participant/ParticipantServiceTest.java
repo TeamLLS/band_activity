@@ -50,7 +50,7 @@ public class ParticipantServiceTest {
     @BeforeEach
     public void saveParticipant(){
 
-        Activity activity = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null));
+        Activity activity = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null, null));
 
         activities = new ArrayList<>();
         activities.add(activity);
@@ -149,11 +149,11 @@ public class ParticipantServiceTest {
 
         NotAttendActivity notAttend = (NotAttendActivity) commands.get(0);
 
-        Map<String, Object> resultA = participantService.getParticipantList(1L, "UserA", 0);
+        Map<String, Object> resultA = participantService.getParticipantList(1L, "UserA", 0, 2);
 
         participantService.notAttendActivity(notAttend);
 
-        Map<String, Object> resultB = participantService.getParticipantList(1L, "UserA", 1);
+        Map<String, Object> resultB = participantService.getParticipantList(1L, "UserA", 1, 2);
 
         List<ParticipantDto> listA = (List<ParticipantDto>)resultA.get("list");
         List<ParticipantDto> listB = (List<ParticipantDto>)resultB.get("list");

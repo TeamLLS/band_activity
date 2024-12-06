@@ -25,6 +25,7 @@ public class ActivityDto {
     private Instant startTime;
 
     private Instant endTime;
+    private Instant deadline;
 
     private String status;
 
@@ -40,6 +41,7 @@ public class ActivityDto {
         this.description = activity.getDescription();
         this.startTime = activity.getStartTime();
         this.endTime = activity.getEndTime();
+        this.deadline = activity.getDeadline();
         this.status = activity.getStatus().getDisplay();
         this.participantNum = activity.getParticipantNum();
     }

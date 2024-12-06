@@ -17,7 +17,7 @@ public class ParticipantStatusChanged extends ParticipantEvent{
 
     public ParticipantStatusChanged(String username, Participant participant) {
         super(UUID.randomUUID().toString(), participant.getActivity().getClubId(), participant.getActivity().getId(),
-                participant.getMemberId(), username, Instant.now());
+                participant.getMemberId(), username, participant.getChangedAt());
         this.status=participant.getStatus();
     }
 }

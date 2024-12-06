@@ -21,6 +21,7 @@ public class ActivityCreated extends ActivityEvent{
     private String description;
     private Instant startTime;
     private Instant endTime;
+    private Instant deadline;
 
 
     public ActivityCreated(String username, Activity activity) {
@@ -31,5 +32,6 @@ public class ActivityCreated extends ActivityEvent{
         this.description = activity.getDescription();
         this.startTime = activity.getStartTime();
         this.endTime = activity.getEndTime();
+        this.deadline = activity.getDeadline();
     }
 }

@@ -16,7 +16,7 @@ public class ParticipantCreated extends ParticipantEvent{
 
     public ParticipantCreated(String username, Participant participant) {
         super(UUID.randomUUID().toString(), participant.getActivity().getClubId(), participant.getActivity().getId(),
-                participant.getMemberId(), username, Instant.now());
+                participant.getMemberId(), username, participant.getChangedAt());
         this.memberName = participant.getMemberName();
     }
 }

@@ -103,8 +103,8 @@ public class ParticipantService {
     }
 
     @Transactional(readOnly = true)
-    public Map<String, Object> getParticipantList(Long activityId, String username, int pageNo){
-        List<ParticipantDto> list = participantStore.findListByActivityId(activityId, pageNo, 2).getContent()
+    public Map<String, Object> getParticipantList(Long activityId, String username, int pageNo, int pageSize){
+        List<ParticipantDto> list = participantStore.findListByActivityId(activityId, pageNo, pageSize).getContent()
                 .stream().map(ParticipantDto::new).toList();
 
         Boolean attend;
@@ -127,7 +127,7 @@ public class ParticipantService {
         int pageNo=0;
 
         do{
-            page = participantStore.findListByActivityId(command.getActivityId(), pageNo, 2);
+            page = participantStore.findListByActivityId(command.getActivityId(), pageNo, 50);
             page.getContent().forEach(p -> participantStore.saveEvent(p.confirm(command)));
 
             pageNo++;

@@ -4,6 +4,7 @@ package com.example.band_activity.participant;
 import com.example.band_activity.activity.Activity;
 import com.example.band_activity.activity.ActivityStore;
 import com.example.band_activity.activity.command.OpenActivity;
+import com.example.band_activity.external.kafka.KafkaProducerService;
 import com.example.band_activity.participant.command.AttendActivity;
 import com.example.band_activity.participant.event.ParticipantConfirmed;
 import com.example.band_activity.participant.event.ParticipantEventJpo;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 
 
@@ -20,8 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DataJpaTest
-@Import({ParticipantStore.class, ActivityStore.class})
+@Import({ParticipantStore.class, ActivityStore.class, KafkaProducerService.class})
 public class ParticipantStoreTest {
+
+    @MockBean
+    KafkaProducerService kafkaProducerService;
 
     @Autowired
     ActivityStore activityStore;
@@ -35,7 +40,7 @@ public class ParticipantStoreTest {
     @BeforeEach
     public void saveParticipant(){
 
-        Activity activity = activityStore.save("UserA", new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null)));
+        Activity activity = activityStore.save("UserA", new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlace", null, null, null, null)));
 
         activities = new ArrayList<>();
         activities.add(activity);

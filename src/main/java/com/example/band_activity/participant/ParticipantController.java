@@ -19,12 +19,12 @@ public class ParticipantController {
 
     @GetMapping("/{activityId}/list")
     public ResponseEntity<?> getParticipantList(@RequestHeader String username, @PathVariable Long activityId, @RequestParam int pageNo){
-        return ResponseEntity.ok().body(participantService.getParticipantList(activityId, username, pageNo));
+        return ResponseEntity.ok().body(participantService.getParticipantList(activityId, username, pageNo, 50));
     }
 
     @GetMapping("/{clubId}/activity/list")
     public ResponseEntity<?> getParticipantActivityList(@RequestHeader String username, @PathVariable Long clubId, @RequestParam int pageNo){
-        List<ParticipantActivityItemDto> participantActivityList = participantService.getParticipantActivityList(clubId, username, pageNo, 2);
+        List<ParticipantActivityItemDto> participantActivityList = participantService.getParticipantActivityList(clubId, username, pageNo, 50);
 
         Map<String, Object> response = new HashMap<>();
         response.put("list", participantActivityList);

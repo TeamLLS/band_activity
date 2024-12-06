@@ -1,6 +1,7 @@
 package com.example.band_activity.external.kafka;
 
 import com.example.band_activity.activity.event.ActivityEvent;
+import com.example.band_activity.core.Event;
 import com.example.band_activity.external.JsonUtil;
 import com.example.band_activity.participant.Participant;
 import com.example.band_activity.participant.event.ParticipantEvent;
@@ -25,26 +26,7 @@ public class KafkaProducerService {
     private String dataTopic;
 
 
-    public String sendActivityEventToKafka(ActivityEvent event){
-
-        ObjectNode node = JsonUtil.toObjectNode(event);
-        node.put("type", event.getClass().getSimpleName());
-        String message = JsonUtil.toJson(node);
-
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(dataTopic, message);
-
-        future.whenComplete((result, ex) -> {
-            if(ex != null){
-                log.error("Error: " + ex.getMessage());
-            } else{
-                log.info("Success: " + result.getRecordMetadata());
-            }
-        });
-
-        return message;
-    }
-
-    public String sendParticipantEventToKafka(ParticipantEvent event){
+    public String sendEventToKafka(Event event){
 
         ObjectNode node = JsonUtil.toObjectNode(event);
         node.put("type", event.getClass().getSimpleName());

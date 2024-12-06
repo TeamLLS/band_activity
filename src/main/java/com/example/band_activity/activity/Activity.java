@@ -5,6 +5,7 @@ import com.example.band_activity.activity.command.CloseActivity;
 import com.example.band_activity.activity.command.OpenActivity;
 import com.example.band_activity.activity.event.ActivityCanceled;
 import com.example.band_activity.activity.event.ActivityClosed;
+import com.example.band_activity.simulation.command.CreateActivityDummy;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class Activity {
     private String description;
     private Instant startTime;
     private Instant endTime;
+    private Instant deadline;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -47,9 +49,26 @@ public class Activity {
         this.description = command.getDescription();
         this.startTime = command.getStartTime();
         this.endTime = command.getEndTime();
+        this.deadline = command.getDeadline();
         this.status = ActivityStatus.OPENED;
         this.participantNum = 0;
         this.createdAt = Instant.now();
+    }
+
+    //테스트용
+    public Activity(CreateActivityDummy command){
+        this.clubId = command.getClubId();
+        this.name = command.getName();
+        this.image = command.getImage();
+        this.location = command.getLocation();
+        this.description = command.getDescription();
+        this.startTime = command.getStartTime();
+        this.endTime = command.getEndTime();
+        this.deadline = command.getDeadline();
+        this.status = ActivityStatus.CLOSED;
+        this.participantNum = 0;
+        this.createdAt = command.getTime();
+        this.closedAt = command.getDeadline().plusSeconds(3600);
     }
 
     public ActivityClosed close(CloseActivity command){

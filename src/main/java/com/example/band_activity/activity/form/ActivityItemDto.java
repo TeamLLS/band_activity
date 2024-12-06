@@ -4,6 +4,8 @@ import com.example.band_activity.activity.Activity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
+
 
 @Getter
 @Setter
@@ -15,6 +17,8 @@ public class ActivityItemDto {
 
     private String image;
 
+    private Instant time;
+
     private String status;
 
     private Integer participantNum;
@@ -24,6 +28,7 @@ public class ActivityItemDto {
         this.id = activity.getId();
         this.name = activity.getName();
         this.image = imageResource;
+        this.time = activity.getStartTime();
         this.status = activity.getStatus().getDisplay();
         this.participantNum = activity.getParticipantNum();
     }

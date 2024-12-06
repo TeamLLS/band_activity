@@ -48,7 +48,7 @@ public class ActivityStore {
         ActivityEventJpo saved = activityEventRepository.save(new ActivityEventJpo(event));
 
         if(!(event instanceof ActivityCreated)){
-            kafkaProducerService.sendActivityEventToKafka(event);
+            kafkaProducerService.sendEventToKafka(event);
         }
 
         return saved;

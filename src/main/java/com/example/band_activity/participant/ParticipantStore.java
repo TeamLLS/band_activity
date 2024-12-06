@@ -43,7 +43,7 @@ public class ParticipantStore {
         ParticipantEventJpo saved = participantEventRepository.save(new ParticipantEventJpo(event));
 
         if(event instanceof ParticipantConfirmed){
-            kafkaProducerService.sendParticipantEventToKafka(event);
+            kafkaProducerService.sendEventToKafka(event);
         }
 
         return saved;

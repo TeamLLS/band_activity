@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +44,9 @@ public class ActivityServiceTest {
     @BeforeEach
     public void saveActivities(){
 
-        Activity saved1 = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", null, null, null));
-        Activity saved2 = new Activity(new OpenActivity("UserA", 1L, "TestActivityB", "TestImageB",null, null, null));
-        Activity saved3 = new Activity(new OpenActivity("UserB", 1L, "TestActivityC", "TestImageC", null, null, null));
+        Activity saved1 = new Activity(new OpenActivity("UserA", 1L, "TestActivityA", "TestImageA", "TestPlaceA", null, null, null, null));
+        Activity saved2 = new Activity(new OpenActivity("UserA", 1L, "TestActivityB", "TestImageB", "TestPlaceB", null, null, null, null));
+        Activity saved3 = new Activity(new OpenActivity("UserB", 1L, "TestActivityC", "TestImageC", "TestPlaceC", null, null, null, null));
 
         activities = new ArrayList<>();
         activities.add(0, saved1);

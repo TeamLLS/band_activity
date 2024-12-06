@@ -10,10 +10,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 public class ActivityCanceled extends ActivityEvent{
-    private ActivityStatus status;
 
     public ActivityCanceled(String username, Activity activity) {
         super(UUID.randomUUID().toString(), activity.getId(), activity.getClubId(), username, activity.getClosedAt());
-        this.status = ActivityStatus.CANCELED;
     }
 }

@@ -1,7 +1,6 @@
 package com.example.band_activity.participant.event;
 
-import com.example.band_activity.external.JsonUtil;
-import jakarta.validation.constraints.Min;
+import com.example.band_activity.core.Event;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,29 +9,14 @@ import java.time.Instant;
 
 @Getter
 @NoArgsConstructor
-public abstract class ParticipantEvent {
+public abstract class ParticipantEvent extends Event {
 
-    private String eventId;
-    private Long clubId;
     private Long activityId;
     private Long memberId;
-    private String triggeredBy;
-    private Instant time;
 
     public ParticipantEvent(String eventId, Long clubId, Long activityId, Long memberId, String triggeredBy, Instant time) {
-        this.eventId = eventId;
-        this.clubId = clubId;
+        super(eventId, clubId, triggeredBy, time);
         this.activityId = activityId;
         this.memberId = memberId;
-        this.triggeredBy = triggeredBy;
-        this.time = time;
-    }
-
-    public String typeName(){
-        return this.getClass().getTypeName();
-    }
-
-    public String Payload(){
-        return JsonUtil.toJson(this);
     }
 }

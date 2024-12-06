@@ -9,10 +9,10 @@ import java.util.Optional;
 
 public interface ParticipantRepository extends JpaRepository<Participant, Long> {
 
-    @Query("SELECT p FROM Participant p JOIN FETCH p.activity a WHERE a.clubId =:clubId AND p.username =:username")
+    @Query("SELECT p FROM Participant p JOIN FETCH p.activity a WHERE a.clubId =:clubId AND p.username =:username AND (p.status='ATTEND' OR p.status = 'ADDITIONAL_ATTEND')")
     public Page<Participant> findAllWithActivityByUsername(@Param("clubId") Long clubId, @Param("username") String username, Pageable pageable);
 
-    @Query("SELECT p FROM Participant p WHERE p.activity.id =:activityId")
+    @Query("SELECT p FROM Participant p WHERE p.activity.id =:activityId AND (p.status='ATTEND' OR p.status = 'ADDITIONAL_ATTEND')")
     public Page<Participant> findAllByActivityId(@Param("activityId") Long activityId, Pageable pageable);
 
     public Optional<Participant> findByActivityIdAndUsername(Long activityId, String username); //조회용 조회
