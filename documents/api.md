@@ -56,6 +56,7 @@ body: {
       id: Activity Id, (Long)
       name: 활동 이름,  (String)
       image: 이미지 url,  (String)
+      time: 활동 시작 시간, (Instnat, ISO 8601)
       status: 상태,  (String)
       participantNum: 참가자 수 (Integer)
     },
