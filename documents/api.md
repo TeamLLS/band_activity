@@ -87,6 +87,7 @@ body: {
   image: 이미지 url,  (String)
   location: 활동 장소, (String)
   description: 설명, (String)
+  contactInfo: 연락처, (String)
   startTime: 시작 시간, (Instnat, ISO 8601)
   endTime: 종료 시간, (Instnat, ISO 8601)
   deadline: 모집 종료 시간  (Instnat, ISO 8601)
