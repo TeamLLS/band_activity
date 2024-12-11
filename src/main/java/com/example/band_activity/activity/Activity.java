@@ -32,6 +32,7 @@ public class Activity {
     private Instant startTime;
     private Instant endTime;
     private Instant deadline;
+    private String contactInfo;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -50,6 +51,7 @@ public class Activity {
         this.startTime = command.getStartTime();
         this.endTime = command.getEndTime();
         this.deadline = command.getDeadline();
+        this.contactInfo = command.getContactInfo();
         this.status = ActivityStatus.OPENED;
         this.participantNum = 0;
         this.createdAt = Instant.now();

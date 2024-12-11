@@ -25,11 +25,11 @@ public class DummyUtil {
     public void makeDummy(){
 
         OpenActivity commandA1 = new OpenActivity("Dummy_userB", 1L, "활동1", "common/activity/default.png", "장소1", "for test1",
-                Instant.parse("2024-12-14T09:30:00+09:00"), Instant.parse("2024-12-15T12:30:00+09:00"), Instant.parse("2024-12-13T12:30:00+09:00"));
+                Instant.parse("2024-12-14T09:30:00+09:00"), Instant.parse("2024-12-15T12:30:00+09:00"), Instant.parse("2024-12-13T12:30:00+09:00"), "010-0000-0000");
         OpenActivity commandA2 = new OpenActivity("Dummy_userB", 1L, "활동2", "common/activity/default.png", "장소2", "for test2",
-                Instant.parse("2024-12-17T10:30:00+09:00"), Instant.parse("2024-12-18T16:30:00+09:00"), Instant.parse("2024-12-16T12:30:00+09:00"));
+                Instant.parse("2024-12-17T10:30:00+09:00"), Instant.parse("2024-12-18T16:30:00+09:00"), Instant.parse("2024-12-16T12:30:00+09:00"), "010-0000-0000");
         OpenActivity commandA3 = new OpenActivity("Dummy_userA", 1L, "활동3", "common/activity/default.png", "장소3", "for test3",
-                Instant.parse("2024-12-21T12:30:00+09:00"), Instant.parse("2024-12-23T17:30:00+09:00"), Instant.parse("2024-12-20T12:30:00+09:00"));
+                Instant.parse("2024-12-21T12:30:00+09:00"), Instant.parse("2024-12-23T17:30:00+09:00"), Instant.parse("2024-12-20T12:30:00+09:00"), "010-0000-0000");
 
         Activity activity1 = activityRepository.save(new Activity(commandA1));
         Activity activity2 = activityRepository.save(new Activity(commandA2));

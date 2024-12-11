@@ -14,10 +14,12 @@ import java.util.UUID;
 public class ParticipantConfirmed extends ParticipantEvent{
 
     private ParticipantStatus status;
+    private Instant changedAt;
 
     public ParticipantConfirmed(String username, Participant participant) {
         super(UUID.randomUUID().toString(), participant.getActivity().getClubId(), participant.getActivity().getId(),
                 participant.getMemberId(), username, participant.getChangedAt());
         this.status = participant.getStatus();
+        this.changedAt = participant.getChangedAt();
     }
 }

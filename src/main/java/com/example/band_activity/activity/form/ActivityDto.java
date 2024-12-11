@@ -12,18 +12,15 @@ import java.time.Instant;
 public class ActivityDto {
 
     private Long id;
-
     private Long clubId;
-
     private String name;
-
     private String image;
 
     private String location;
     private String description;
+    private String contactInfo;
 
     private Instant startTime;
-
     private Instant endTime;
     private Instant deadline;
 
@@ -39,6 +36,7 @@ public class ActivityDto {
         this.image = imageResource;
         this.location = activity.getLocation();
         this.description = activity.getDescription();
+        this.contactInfo = activity.getContactInfo();
         this.startTime = activity.getStartTime();
         this.endTime = activity.getEndTime();
         this.deadline = activity.getDeadline();

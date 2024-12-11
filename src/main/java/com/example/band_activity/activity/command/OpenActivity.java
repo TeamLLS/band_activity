@@ -20,8 +20,10 @@ public class OpenActivity extends Command{
     private Instant startTime;
     private Instant endTime;
     private Instant deadline;
+    private String contactInfo;
 
-    public OpenActivity(String username, Long clubId, String name, String image, String location, String description, Instant startTime, Instant endTime, Instant deadline) {
+    public OpenActivity(String username, Long clubId, String name, String image, String location, String description,
+                        Instant startTime, Instant endTime, Instant deadline, String contactInfo) {
         super(username, clubId);
         this.name = name;
         this.image = image;
@@ -30,5 +32,6 @@ public class OpenActivity extends Command{
         this.startTime = startTime;
         this.endTime = endTime;
         this.deadline = deadline;
+        this.contactInfo = contactInfo;
     }
 }
