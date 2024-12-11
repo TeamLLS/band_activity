@@ -18,6 +18,9 @@
 
 ## ▶활동 생성
 ### POST /activity
+
+- contactInfo를 포함하지 않으면 Club 연락처로 등록
+
 ```
 header: {  
   Authorization: Bearer ${accessToken value}
@@ -29,6 +32,7 @@ form-data: {
   description: 활동 설명, (String)
   image: 활동 이미지, (MulitPartFile)
   location: 활동 장소, (String)
+  contactInfo: 연락처, (String)
   startTime: 활동 시작 시간, (Instant, ISO 8601)
   endTime: 활동 종료 시간, (Instnat, ISO 8601)
   deadline: 모집 종료 시간  (Instnat, ISO 8601)
@@ -56,6 +60,7 @@ body: {
       id: Activity Id, (Long)
       name: 활동 이름,  (String)
       image: 이미지 url,  (String)
+      time: 활동 시작 시간, (Instnat, ISO 8601)
       status: 상태,  (String)
       participantNum: 참가자 수 (Integer)
     },
@@ -82,6 +87,7 @@ body: {
   image: 이미지 url,  (String)
   location: 활동 장소, (String)
   description: 설명, (String)
+  contactInfo: 연락처, (String)
   startTime: 시작 시간, (Instnat, ISO 8601)
   endTime: 종료 시간, (Instnat, ISO 8601)
   deadline: 모집 종료 시간  (Instnat, ISO 8601)
